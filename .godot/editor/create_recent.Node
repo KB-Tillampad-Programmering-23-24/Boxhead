@@ -1,0 +1,7 @@
+CanvasLayer
+RichTextLabel
+Label
+CollisionShape2D
+Sprite2D
+CharacterBody2D
+Node

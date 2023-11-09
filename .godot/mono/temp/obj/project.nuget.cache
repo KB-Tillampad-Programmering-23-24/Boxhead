@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "vQI4UWWLLF1MWP22jQvJ7BZnOfEQmcFo6qVXUcyPtz/vdX1NYIYHDZNcE/WsFavqo9rRIQoYs5rz6C/wxlVTYg==",
+  "success": true,
+  "projectFilePath": "C:\\Workspace Godot\\Boxhead\\Boxhead.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\aahanjoh\\.nuget\\packages\\godot.sourcegenerators\\4.1.2\\godot.sourcegenerators.4.1.2.nupkg.sha512",
+    "C:\\Users\\aahanjoh\\.nuget\\packages\\godotsharp\\4.1.2\\godotsharp.4.1.2.nupkg.sha512",
+    "C:\\Users\\aahanjoh\\.nuget\\packages\\godotsharpeditor\\4.1.2\\godotsharpeditor.4.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}

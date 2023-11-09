@@ -1,0 +1,17 @@
+C:\Workspace Godot\Boxhead\.godot\mono\temp\bin\Debug\Boxhead.deps.json
+C:\Workspace Godot\Boxhead\.godot\mono\temp\bin\Debug\Boxhead.runtimeconfig.json
+C:\Workspace Godot\Boxhead\.godot\mono\temp\bin\Debug\Boxhead.dll
+C:\Workspace Godot\Boxhead\.godot\mono\temp\bin\Debug\Boxhead.pdb
+C:\Workspace Godot\Boxhead\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Workspace Godot\Boxhead\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.csproj.AssemblyReference.cache
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.GeneratedMSBuildEditorConfig.editorconfig
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.AssemblyInfoInputs.cache
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.AssemblyInfo.cs
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.csproj.CoreCompileInputs.cache
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.csproj.CopyComplete
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.dll
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\refint\Boxhead.dll
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.pdb
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\Boxhead.genruntimeconfig.cache
+C:\Workspace Godot\Boxhead\.godot\mono\temp\obj\Debug\ref\Boxhead.dll

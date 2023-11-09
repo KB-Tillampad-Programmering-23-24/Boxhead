@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://6e188yrutf6j"]
+
+[ext_resource type="PackedScene" uid="uid://bma6rahrwqsyk" path="res://Player.tscn" id="1_vqir8"]
+[ext_resource type="Script" path="res://Label.cs" id="2_ly37u"]
+
+[sub_resource type="SystemFont" id="SystemFont_tuxn7"]
+
+[sub_resource type="Theme" id="Theme_qg7fe"]
+default_font = SubResource("SystemFont_tuxn7")
+default_font_size = 64
+
+[sub_resource type="Theme" id="Theme_0w4gb"]
+default_font_size = 72
+
+[node name="Node" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_vqir8")]
+position = Vector2(493, 305)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="UI"]
+offset_right = 159.0
+offset_bottom = 91.0
+theme = SubResource("Theme_qg7fe")
+text = "HP: 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_ly37u")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -467.0
+offset_top = -114.5
+offset_right = 467.0
+offset_bottom = 114.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0w4gb")
+bbcode_enabled = true
+text = "[center][color=red]You died[/color]
+Press 'R' to Restart[/center]"
+
+[connection signal="LoseHP" from="Player" to="UI/Label" method="OnPlayerLoseHP"]
