@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://6e188yrutf6j"]
+[gd_scene load_steps=9 format=3 uid="uid://6e188yrutf6j"]
 
 [ext_resource type="PackedScene" uid="uid://bma6rahrwqsyk" path="res://Player.tscn" id="1_vqir8"]
+[ext_resource type="Script" path="res://Main.cs" id="1_yvjcs"]
 [ext_resource type="Script" path="res://Label.cs" id="2_ly37u"]
+[ext_resource type="Script" path="res://DeathScreen.cs" id="4_218ha"]
+[ext_resource type="PackedScene" uid="uid://ci3du1dbv5047" path="res://Rock.tscn" id="5_5gxq6"]
 
 [sub_resource type="SystemFont" id="SystemFont_tuxn7"]
 
@@ -13,9 +16,12 @@ default_font_size = 64
 default_font_size = 72
 
 [node name="Node" type="Node"]
+script = ExtResource("1_yvjcs")
 
 [node name="Player" parent="." instance=ExtResource("1_vqir8")]
 position = Vector2(493, 305)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -28,7 +34,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_ly37u")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+[node name="DeathScreen" type="RichTextLabel" parent="UI"]
+process_mode = 2
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -45,5 +52,13 @@ theme = SubResource("Theme_0w4gb")
 bbcode_enabled = true
 text = "[center][color=red]You died[/color]
 Press 'R' to Restart[/center]"
+script = ExtResource("4_218ha")
 
+[node name="Rock" parent="." instance=ExtResource("5_5gxq6")]
+position = Vector2(739, 400)
+
+[node name="Rock2" parent="." instance=ExtResource("5_5gxq6")]
+position = Vector2(890, 255)
+
+[connection signal="Died" from="Player" to="UI/DeathScreen" method="OnPlayerDied"]
 [connection signal="LoseHP" from="Player" to="UI/Label" method="OnPlayerLoseHP"]

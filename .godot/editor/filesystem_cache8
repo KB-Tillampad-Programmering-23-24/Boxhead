@@ -1,5 +1,13 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1699276012
+::res://::1699529438
+DeathScreen.cs::CSharpScript::-1::1699529026::0::1::::<><>::
 icon.svg::CompressedTexture2D::8483736861540529349::1699275810::1699275817::1::::<><>::
-::res://imgs/::1699276012
+Label.cs::CSharpScript::-1::1699280056::0::1::::<><>::
+Main.cs::CSharpScript::-1::1699528367::0::1::::<><>::
+Main.tscn::PackedScene::2185751007951775923::1699529032::0::1::::<><>::uid://bma6rahrwqsyk::::res://Player.tscn<>res://Main.cs<>res://Label.cs<>res://DeathScreen.cs
+Player.cs::CSharpScript::-1::1699527883::0::1::::<><>::
+Player.tscn::PackedScene::3230599404237716290::1699529032::0::1::::<><>::uid://cgt6lvxjuiwfr::::res://imgs/PlayerPlaceholder.png<>res://Player.cs
+::res://imgs/::1699529438
+Box.png::CompressedTexture2D::5138137589321821254::1699529424::1699529438::1::::<><>::
 PlayerPlaceholder.png::CompressedTexture2D::5235100616007086579::1699276009::1699276012::1::::<><>::
+rock.png::CompressedTexture2D::5221862382045820859::1699529424::1699529438::1::::<><>::

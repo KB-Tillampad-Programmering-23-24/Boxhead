@@ -5,6 +5,9 @@ public partial class Player : CharacterBody2D
 {
 	[Signal]
 	public delegate void LoseHPEventHandler(int currentHP);
+	[Signal]
+	public delegate void DiedEventHandler();
+
 	public int currentHP = 3;
 	public int Speed {get; set;} = 350;
 	// Called when the node enters the scene tree for the first time.
@@ -19,6 +22,11 @@ public partial class Player : CharacterBody2D
 			currentHP--;
 			EmitSignal(SignalName.LoseHP, currentHP);
 			GD.Print("Stop hitting yourself");
+
+			if(currentHP <= 0){
+				EmitSignal(SignalName.Died);
+				GetTree().Paused = true;
+			}
 		}
 
 
