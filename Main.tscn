@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://6e188yrutf6j"]
+[gd_scene load_steps=10 format=3 uid="uid://6e188yrutf6j"]
 
 [ext_resource type="PackedScene" uid="uid://bma6rahrwqsyk" path="res://Player.tscn" id="1_vqir8"]
 [ext_resource type="Script" path="res://Main.cs" id="1_yvjcs"]
 [ext_resource type="Script" path="res://Label.cs" id="2_ly37u"]
 [ext_resource type="Script" path="res://DeathScreen.cs" id="4_218ha"]
 [ext_resource type="PackedScene" uid="uid://ci3du1dbv5047" path="res://Rock.tscn" id="5_5gxq6"]
+[ext_resource type="PackedScene" uid="uid://balbgw8j55img" path="res://Box.tscn" id="6_8mco6"]
 
 [sub_resource type="SystemFont" id="SystemFont_tuxn7"]
 
@@ -21,7 +22,10 @@ script = ExtResource("1_yvjcs")
 [node name="Player" parent="." instance=ExtResource("1_vqir8")]
 position = Vector2(493, 305)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(493, 305)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -59,6 +63,12 @@ position = Vector2(739, 400)
 
 [node name="Rock2" parent="." instance=ExtResource("5_5gxq6")]
 position = Vector2(890, 255)
+
+[node name="Box" parent="." instance=ExtResource("6_8mco6")]
+position = Vector2(296, 323)
+
+[node name="Box2" parent="." instance=ExtResource("6_8mco6")]
+position = Vector2(412, 143)
 
 [connection signal="Died" from="Player" to="UI/DeathScreen" method="OnPlayerDied"]
 [connection signal="LoseHP" from="Player" to="UI/Label" method="OnPlayerLoseHP"]

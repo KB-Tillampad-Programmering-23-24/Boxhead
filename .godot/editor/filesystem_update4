@@ -1,7 +1,8 @@
-res://Label.cs
-res://Player.cs
 res://Main.tscn
 res://Player.tscn
-res://Main.cs
-res://DeathScreen.cs
 res://Rock.tscn
+res://DeathScreen.cs
+res://Label.cs
+res://Main.cs
+res://Player.cs
+res://Box.tscn

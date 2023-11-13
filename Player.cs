@@ -43,4 +43,14 @@ public partial class Player : CharacterBody2D
 		Velocity = myVelocity;
 		MoveAndSlide();
 	}
+
+	public override void _PhysicsProcess(double delta){
+		for(int i = 0; i < GetSlideCollisionCount(); i++){
+			var collision = GetSlideCollision(i);
+			if(collision.GetCollider() is RigidBody2D){
+				((RigidBody2D)collision.GetCollider()).ApplyForce(-collision.GetNormal()*1000);
+			}
+		}
+
+	}
 }
