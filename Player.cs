@@ -10,9 +10,11 @@ public partial class Player : CharacterBody2D
 
 	public int currentHP = 3;
 	public int Speed {get; set;} = 350;
+	AnimatedSprite2D animationHandler;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		animationHandler = GetNode<AnimatedSprite2D>("Sprite2D");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,10 +36,23 @@ public partial class Player : CharacterBody2D
 
 		var myDirection = Input.GetVector("MoveLeft","MoveRight","MoveUp","MoveDown");
 
+		if(Input.IsActionJustPressed("Punch")){
+			GD.Print("punch");
+			animationHandler.Play("punch");
+		}
+
 		if(myDirection != Vector2.Zero){
 			myVelocity = myDirection * Speed;
+			animationHandler.Play("walk");
+			if(myDirection.X < 0){
+				animationHandler.FlipH = true;
+			} else {
+				animationHandler.FlipH = false;
+			}
+			
 		} else {
 			myVelocity = Vector2.Zero;
+			animationHandler.Play("idle");
 		}
 
 		Velocity = myVelocity;
