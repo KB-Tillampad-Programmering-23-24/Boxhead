@@ -11,10 +11,19 @@ public partial class Player : CharacterBody2D
 	public int currentHP = 3;
 	public int Speed {get; set;} = 350;
 	AnimatedSprite2D animationHandler;
+
+	enum State {
+		IDLE = 0,
+		WALKING = 1,
+		PUNCHING = 2
+	}
+
+	State currentState;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		animationHandler = GetNode<AnimatedSprite2D>("Sprite2D");
+		currentState = State.IDLE;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,12 +47,14 @@ public partial class Player : CharacterBody2D
 
 		if(Input.IsActionJustPressed("Punch")){
 			GD.Print("punch");
-			animationHandler.Play("punch");
+			currentState = State.PUNCHING;
 		}
 
 		if(myDirection != Vector2.Zero){
 			myVelocity = myDirection * Speed;
-			animationHandler.Play("walk");
+			if(currentState != State.PUNCHING){
+				currentState = State.WALKING;
+			}
 			if(myDirection.X < 0){
 				animationHandler.FlipH = true;
 			} else {
@@ -52,10 +63,28 @@ public partial class Player : CharacterBody2D
 			
 		} else {
 			myVelocity = Vector2.Zero;
-			animationHandler.Play("idle");
+			if(currentState != State.PUNCHING){
+				currentState = State.IDLE;
+			}
 		}
 
 		Velocity = myVelocity;
+
+		switch (currentState)
+		{
+			case State.PUNCHING:
+				animationHandler.Play("punch");
+				break;
+			case State.WALKING:
+				animationHandler.Play("walk");
+				break;
+			case State.IDLE:
+				animationHandler.Play("idle");
+				break;
+			default:
+				animationHandler.Play("idle");
+				break;
+		}
 		MoveAndSlide();
 	}
 
@@ -67,5 +96,9 @@ public partial class Player : CharacterBody2D
 			}
 		}
 
+	}
+
+	public void OnAnimationFinished(){
+		currentState = State.IDLE;
 	}
 }

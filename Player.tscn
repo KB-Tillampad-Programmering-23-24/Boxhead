@@ -48,7 +48,7 @@ animations = [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_bvarr")
 }],
-"loop": true,
+"loop": false,
 "name": &"punch",
 "speed": 5.0
 }, {
@@ -83,3 +83,5 @@ animation = &"punch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ws38b")
+
+[connection signal="animation_finished" from="Sprite2D" to="." method="OnAnimationFinished"]
