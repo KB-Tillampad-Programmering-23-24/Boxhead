@@ -10,7 +10,8 @@ public partial class Player : CharacterBody2D
 
 	public int currentHP = 3;
 	public int Speed {get; set;} = 350;
-	AnimatedSprite2D animationHandler;
+	AnimationPlayer animationHandler;
+	Sprite2D playerSprite;
 
 	enum State {
 		IDLE = 0,
@@ -22,7 +23,8 @@ public partial class Player : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		animationHandler = GetNode<AnimatedSprite2D>("Sprite2D");
+		animationHandler = GetNode<AnimationPlayer>("AnimationPlayer");
+		playerSprite = GetNode<Sprite2D>("Sprite2D");
 		currentState = State.IDLE;
 	}
 
@@ -56,9 +58,9 @@ public partial class Player : CharacterBody2D
 				currentState = State.WALKING;
 			}
 			if(myDirection.X < 0){
-				animationHandler.FlipH = true;
+				playerSprite.FlipH = true;
 			} else {
-				animationHandler.FlipH = false;
+				playerSprite.FlipH = false;
 			}
 			
 		} else {
@@ -98,7 +100,7 @@ public partial class Player : CharacterBody2D
 
 	}
 
-	public void OnAnimationFinished(){
+	public void OnAnimationFinished(string name){
 		currentState = State.IDLE;
 	}
 }

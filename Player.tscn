@@ -1,87 +1,94 @@
-[gd_scene load_steps=12 format=3 uid="uid://bma6rahrwqsyk"]
+[gd_scene load_steps=9 format=3 uid="uid://bma6rahrwqsyk"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_v0yqd"]
 [ext_resource type="Texture2D" uid="uid://baquicbk5ftdi" path="res://imgs/PlayerSpritesheet.png" id="2_lhm1c"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ggt3m"]
-atlas = ExtResource("2_lhm1c")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dgpy2"]
-atlas = ExtResource("2_lhm1c")
-region = Rect2(0, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bvarr"]
-atlas = ExtResource("2_lhm1c")
-region = Rect2(128, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mvc5m"]
-atlas = ExtResource("2_lhm1c")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vp0lh"]
-atlas = ExtResource("2_lhm1c")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qny2m"]
-atlas = ExtResource("2_lhm1c")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xiapr"]
-atlas = ExtResource("2_lhm1c")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_pvkg0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ggt3m")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dgpy2")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_bvarr")
-}],
-"loop": false,
-"name": &"punch",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mvc5m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vp0lh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qny2m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xiapr")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 4.0
-}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ws38b"]
 radius = 32.0
 height = 130.0
 
+[sub_resource type="Animation" id="Animation_acykq"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_alnth"]
+resource_name = "walk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_tk5mq"]
+resource_name = "punch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_2eaj6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7tp7j"]
+_data = {
+"RESET": SubResource("Animation_2eaj6"),
+"idle": SubResource("Animation_acykq"),
+"punch": SubResource("Animation_tk5mq"),
+"walk": SubResource("Animation_alnth")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_v0yqd")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_pvkg0")
-animation = &"punch"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lhm1c")
+hframes = 4
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ws38b")
 
-[connection signal="animation_finished" from="Sprite2D" to="." method="OnAnimationFinished"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7tp7j")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]
