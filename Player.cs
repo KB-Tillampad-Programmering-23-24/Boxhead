@@ -58,9 +58,9 @@ public partial class Player : CharacterBody2D
 				currentState = State.WALKING;
 			}
 			if(myDirection.X < 0){
-				playerSprite.FlipH = true;
+				playerSprite.Scale = new Vector2(-1,1);
 			} else {
-				playerSprite.FlipH = false;
+				playerSprite.Scale = new Vector2(1,1);
 			}
 			
 		} else {
