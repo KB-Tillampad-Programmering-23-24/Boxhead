@@ -1,9 +1,9 @@
 CollisionShape2D
+Sprite2D
+RigidBody2D
 Area2D
 AnimationPlayer
-Sprite2D
 AnimatedSprite2D
-RigidBody2D
 Camera2D
 StaticBody2D
 CanvasLayer

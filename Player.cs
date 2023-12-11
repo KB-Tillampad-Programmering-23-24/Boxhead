@@ -7,6 +7,8 @@ public partial class Player : CharacterBody2D
 	public delegate void LoseHPEventHandler(int currentHP);
 	[Signal]
 	public delegate void DiedEventHandler();
+	[Signal]
+	public delegate void ShootEventHandler();
 
 	public int currentHP = 3;
 	public int Speed {get; set;} = 350;
@@ -102,5 +104,8 @@ public partial class Player : CharacterBody2D
 
 	public void OnAnimationFinished(string name){
 		currentState = State.IDLE;
+		if(name == "punch"){
+			EmitSignal(SignalName.Shoot);
+		}
 	}
 }

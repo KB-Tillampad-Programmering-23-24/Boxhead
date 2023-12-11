@@ -3,8 +3,10 @@ using System;
 
 public partial class Main : Node
 {
-Camera2D camera;
-Player player;
+	[Export]
+	public PackedScene projectileScene {get; set;}
+	Camera2D camera;
+	Player player;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -17,6 +19,14 @@ Player player;
 	public override void _Process(double delta)
 	{
 		camera.Position = player.Position;
+	}
+
+	public void OnPlayerShoot(){
+		var projectile = projectileScene.Instantiate<RigidBody2D>();
+		Vector2 projectielPosition = player.Position;
+		projectielPosition += new Vector2(100,0);
+		projectile.Position = projectielPosition;
+		AddChild(projectile);
 	}
 
 }
