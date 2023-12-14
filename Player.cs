@@ -8,10 +8,11 @@ public partial class Player : CharacterBody2D
 	[Signal]
 	public delegate void DiedEventHandler();
 	[Signal]
-	public delegate void ShootEventHandler();
+	public delegate void ShootEventHandler(int playerDirection);
 
 	public int currentHP = 3;
 	public int Speed {get; set;} = 350;
+	int playerDirection = 1;
 	AnimationPlayer animationHandler;
 	Sprite2D playerSprite;
 
@@ -61,8 +62,10 @@ public partial class Player : CharacterBody2D
 			}
 			if(myDirection.X < 0){
 				playerSprite.Scale = new Vector2(-1,1);
+				playerDirection = -1;
 			} else {
 				playerSprite.Scale = new Vector2(1,1);
+				playerDirection = 1;
 			}
 			
 		} else {
@@ -105,7 +108,7 @@ public partial class Player : CharacterBody2D
 	public void OnAnimationFinished(string name){
 		currentState = State.IDLE;
 		if(name == "punch"){
-			EmitSignal(SignalName.Shoot);
+			EmitSignal(SignalName.Shoot, playerDirection);
 		}
 	}
 }

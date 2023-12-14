@@ -21,11 +21,14 @@ public partial class Main : Node
 		camera.Position = player.Position;
 	}
 
-	public void OnPlayerShoot(){
+	public void OnPlayerShoot(int playerDirection){
 		var projectile = projectileScene.Instantiate<RigidBody2D>();
 		Vector2 projectielPosition = player.Position;
-		projectielPosition += new Vector2(100,0);
+		projectielPosition += new Vector2(100*playerDirection,0);
 		projectile.Position = projectielPosition;
+
+		Vector2 projectileVelocity = projectile.LinearVelocity*playerDirection;
+		projectile.LinearVelocity = projectileVelocity;
 		AddChild(projectile);
 	}
 
