@@ -1,0 +1,18 @@
+<script src="http://spelprogrammering.nu/simple.js">
+    let box;
+
+    function start(){
+        box = {x: 0, y: 100, color: "#F2AA00", speed: 5};
+    }
+
+    function update(){
+        clearScreen();
+        rectangle(box.x,box.y, 20,20, box.color);
+
+        box.x  += box.speed;
+
+        if(box.x > 1500){
+            box.speed = -box.speed;
+        }
+    }
+</script>
