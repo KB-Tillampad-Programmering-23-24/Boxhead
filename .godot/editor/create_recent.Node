@@ -1,8 +1,9 @@
-TileMap
 CollisionShape2D
-Sprite2D
-RigidBody2D
 Area2D
+Sprite2D
+CharacterBody2D
+TileMap
+RigidBody2D
 AnimationPlayer
 AnimatedSprite2D
 Camera2D
@@ -10,5 +11,4 @@ StaticBody2D
 CanvasLayer
 RichTextLabel
 Label
-CharacterBody2D
 Node

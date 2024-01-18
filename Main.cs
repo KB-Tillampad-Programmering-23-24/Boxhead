@@ -13,6 +13,8 @@ public partial class Main : Node
 	{
 		camera = GetNode<Camera2D>("Camera2D");
 		player = GetNode<Player>("Player");
+		Enemy enemy = GetNode<Enemy>("Enemy");
+		enemy.target = player;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
