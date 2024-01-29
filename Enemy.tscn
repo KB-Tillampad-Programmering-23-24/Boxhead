@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckrhql5llqdv4"]
+[gd_scene load_steps=6 format=3 uid="uid://ckrhql5llqdv4"]
 
 [ext_resource type="Texture2D" uid="uid://bjkgkejayqqdd" path="res://imgs/Enemy.png" id="1_0ajij"]
 [ext_resource type="Script" path="res://Enemy.cs" id="1_nocjf"]
+[ext_resource type="PackedScene" uid="uid://bfopdmmlmluyl" path="res://Projectile.tscn" id="2_idggf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7g0bj"]
 radius = 127.252
@@ -11,11 +12,14 @@ radius = 575.125
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_nocjf")
+projectileScene = ExtResource("2_idggf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_0ajij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_7g0bj")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -23,3 +27,15 @@ shape = SubResource("CircleShape2D_7g0bj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_yywk2")
 debug_color = Color(0.662745, 0, 0.188235, 0.0588235)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(-186, 308)
+collision_mask = 2
+
+[node name="AttackCD" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="OnPlayerSeen"]
+[connection signal="body_exited" from="Area2D" to="." method="OnPlayerHide"]
+[connection signal="timeout" from="AttackCD" to="." method="OnAttackCDTimeout"]

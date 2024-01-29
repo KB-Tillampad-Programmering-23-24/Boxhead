@@ -5,7 +5,7 @@ res://Box.tscn
 res://Projectile.tscn
 res://Enemy.tscn
 res://DeathScreen.cs
+res://Enemy.cs
 res://Label.cs
 res://Main.cs
 res://Player.cs
-res://Enemy.cs
