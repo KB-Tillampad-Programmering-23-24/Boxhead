@@ -40,6 +40,15 @@ public partial class Enemy : CharacterBody2D
             Velocity = Vector2.Zero;
         }
 
+        if(target.currentState == Player.State.PUNCHING){
+            if((target.Position - Position).Angle() > 0){
+                Velocity = Velocity.Rotated((float)Math.PI/2);
+            } else {
+                Velocity = Velocity.Rotated(-(float)Math.PI/2);
+            }
+            
+        }
+
         MoveAndSlide();
     }
 
@@ -71,17 +80,33 @@ public partial class Enemy : CharacterBody2D
     }
 
     public void OnAttackCDTimeout(){
+        int attack = new Random().Next(3);
         GD.Print("Attack");
         attackTimer.Start(1);
-        /*
-        var direction = (target.Position - Position).Normalized();
-        ShootProjectile(direction);
-        */
-        //RapidAttack();
-        var direction = (target.Position - Position).Normalized();
-        ShootProjectile(direction);
-        ShootProjectile(direction.Rotated((float)Math.PI/6));
-        ShootProjectile(direction.Rotated(-(float)Math.PI/6));
+        Vector2 direction;
+        if((target.Position - Position).Length() > 400){
+            attack = 0;
+        } else if((target.Position - Position).Length() < 200){
+            attack = 2;
+        }
+        switch (attack){
+            case 0:
+            //singel shoot
+                direction = (target.Position - Position).Normalized();
+                ShootProjectile(direction);
+                break;
+            case 1:
+            //rapid shoot
+                RapidAttack();
+                break;
+            case 2:
+            //spread shoot
+                direction = (target.Position - Position).Normalized();
+                ShootProjectile(direction);
+                ShootProjectile(direction.Rotated((float)Math.PI/6));
+                ShootProjectile(direction.Rotated(-(float)Math.PI/6));
+                break;
+        }
     }
 
     public async void RapidAttack(){

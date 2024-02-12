@@ -16,13 +16,13 @@ public partial class Player : CharacterBody2D
 	AnimationPlayer animationHandler;
 	Sprite2D playerSprite;
 
-	enum State {
+	public enum State {
 		IDLE = 0,
 		WALKING = 1,
 		PUNCHING = 2
 	}
 
-	State currentState;
+	public State currentState;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
