@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Enemy : CharacterBody2D
 {
@@ -72,9 +73,23 @@ public partial class Enemy : CharacterBody2D
     public void OnAttackCDTimeout(){
         GD.Print("Attack");
         attackTimer.Start(1);
+        /*
         var direction = (target.Position - Position).Normalized();
         ShootProjectile(direction);
+        */
+        //RapidAttack();
+        var direction = (target.Position - Position).Normalized();
+        ShootProjectile(direction);
+        ShootProjectile(direction.Rotated((float)Math.PI/6));
+        ShootProjectile(direction.Rotated(-(float)Math.PI/6));
+    }
 
+    public async void RapidAttack(){
+        for(int i = 0; i < 3;i++){
+            var direction = (target.Position - Position).Normalized();
+            ShootProjectile(direction);
+            await Task.Delay(150);
+        }
     }
 
     public void ShootProjectile(Vector2 direction){
