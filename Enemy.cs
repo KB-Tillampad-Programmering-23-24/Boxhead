@@ -22,6 +22,7 @@ public partial class Enemy : CharacterBody2D
         currentState = State.PLAYER_HIDDEN;
         ray = GetNode<RayCast2D>("RayCast2D");
         attackTimer = GetNode<Timer>("AttackCD");
+        target = GetTree().Root.GetNode<Player>("Node/Player");
     }
 
     public override void _Process(double delta){
