@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8ywptpjwyvsq"]
+[gd_scene load_steps=5 format=3 uid="uid://c8ywptpjwyvsq"]
 
+[ext_resource type="Script" path="res://Flag.cs" id="1_irobe"]
 [ext_resource type="Texture2D" uid="uid://c64yv7r33xgkf" path="res://imgs/flag.png" id="1_ns678"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d07wt"]
@@ -10,6 +11,7 @@ radius = 14.0
 height = 56.0
 
 [node name="Flag" type="StaticBody2D"]
+script = ExtResource("1_irobe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ns678")
@@ -23,3 +25,5 @@ shape = SubResource("RectangleShape2D_d07wt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(8, 0)
 shape = SubResource("CapsuleShape2D_fvsyi")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnPlayerEntered"]

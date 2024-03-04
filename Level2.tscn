@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://8w0mftth1fsp"]
+[gd_scene load_steps=9 format=3 uid="uid://8w0mftth1fsp"]
 
+[ext_resource type="Script" path="res://Level.cs" id="1_p63q8"]
 [ext_resource type="Texture2D" uid="uid://dg1jllxndpj5w" path="res://imgs/GroundTile.png" id="1_wv1ej"]
 [ext_resource type="PackedScene" uid="uid://ckrhql5llqdv4" path="res://Enemy.tscn" id="2_vue5u"]
 [ext_resource type="PackedScene" uid="uid://c8ywptpjwyvsq" path="res://Flag.tscn" id="3_5uiiv"]
@@ -40,6 +41,7 @@ sources/0 = SubResource("TileSetAtlasSource_schph")
 pattern_0 = SubResource("TileMapPattern_suehp")
 
 [node name="Level2" type="Node2D"]
+script = ExtResource("1_p63q8")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_k63jd")
@@ -53,3 +55,5 @@ position = Vector2(1385, -14)
 position = Vector2(1872, 516)
 
 [node name="PlayerSpawnMarker" type="Marker2D" parent="."]
+
+[connection signal="OnFlagTouch" from="Flag" to="." method="OnFlagTouch"]

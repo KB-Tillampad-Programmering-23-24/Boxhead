@@ -7,3 +7,10 @@ res://Enemy.tscn
 res://Level1.tscn
 res://Level2.tscn
 res://Flag.tscn
+res://DeathScreen.cs
+res://Enemy.cs
+res://Flag.cs
+res://Label.cs
+res://Level.cs
+res://Main.cs
+res://Player.cs
