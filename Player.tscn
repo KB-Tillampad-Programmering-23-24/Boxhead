@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bma6rahrwqsyk"]
+[gd_scene load_steps=11 format=3 uid="uid://bma6rahrwqsyk"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_v0yqd"]
 [ext_resource type="Texture2D" uid="uid://baquicbk5ftdi" path="res://imgs/PlayerSpritesheet.png" id="2_lhm1c"]
+[ext_resource type="AudioStream" uid="uid://b74owqoc3lpud" path="res://Sound/Woosh.mp3" id="3_6xtkq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqkyy"]
 size = Vector2(20.875, 20)
@@ -172,5 +173,10 @@ shape = SubResource("CapsuleShape2D_ws38b")
 libraries = {
 "": SubResource("AnimationLibrary_7tp7j")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6xtkq")
+max_polyphony = 5
+bus = &"Effects"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]

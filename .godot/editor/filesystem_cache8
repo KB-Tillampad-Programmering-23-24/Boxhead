@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1709544229
+::res://::1709557944
 Box.tscn::PackedScene::2409201477686401006::1708349794::0::1::::<><>::uid://cfg7m075814yc::::res://imgs/Box.png
 DeathScreen.cs::CSharpScript::-1::1699529026::0::1::::<><>::
 Enemy.cs::CSharpScript::-1::1707994457::0::1::::<><>::
@@ -26,3 +26,6 @@ PlayerPlaceholder.png::CompressedTexture2D::5235100616007086579::1699276009::169
 PlayerSpritesheet.png::CompressedTexture2D::2420679461050793538::1700132165::1700132172::1::::<><>::
 projectile.png::CompressedTexture2D::7225202058344494903::1702303070::1702303070::1::::<><>::
 rock.png::CompressedTexture2D::5221862382045820859::1699529424::1699529438::1::::<><>::
+::res://Sound/::1709557944
+BackgroundMusic.mp3::AudioStreamMP3::8143448812526622083::1709557904::1709557906::1::::<><>::
+Woosh.mp3::AudioStreamMP3::4693220822472111807::1709557904::1709557944::1::::<><>::

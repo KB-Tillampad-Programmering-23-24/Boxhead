@@ -9,6 +9,7 @@ public partial class Main : Node
 	Player player;
 	int level = 1;
 	Level currentLevel;
+	AudioStreamPlayer musicPlayer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,12 +17,21 @@ public partial class Main : Node
 		camera = GetNode<Camera2D>("Camera2D");
 		player = GetNode<Player>("Player");
 		currentLevel = GetNode<Level>("Level"+level);
+		musicPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		camera.Position = player.Position;
+
+		if(Input.IsActionJustPressed("Mute")){
+			AudioServer.SetBusMute(1, true);
+		}
+	}
+
+	public void OnAudioStreamPlayerFinished(){
+		musicPlayer.Play();
 	}
 
 	public void OnLevelFinish(){

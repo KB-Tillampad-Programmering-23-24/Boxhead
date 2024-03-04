@@ -15,6 +15,7 @@ public partial class Player : CharacterBody2D
 	int playerDirection = 1;
 	AnimationPlayer animationHandler;
 	Sprite2D playerSprite;
+	AudioStreamPlayer effectPlayer;
 
 	public enum State {
 		IDLE = 0,
@@ -29,6 +30,7 @@ public partial class Player : CharacterBody2D
 		animationHandler = GetNode<AnimationPlayer>("AnimationPlayer");
 		playerSprite = GetNode<Sprite2D>("Sprite2D");
 		currentState = State.IDLE;
+		effectPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,6 +54,7 @@ public partial class Player : CharacterBody2D
 
 		if(Input.IsActionJustPressed("Punch")){
 			GD.Print("punch");
+			effectPlayer.Play();
 			currentState = State.PUNCHING;
 		}
 
