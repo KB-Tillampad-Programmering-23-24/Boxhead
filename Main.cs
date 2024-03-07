@@ -18,6 +18,8 @@ public partial class Main : Node
 		player = GetNode<Player>("Player");
 		currentLevel = GetNode<Level>("Level"+level);
 		musicPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+
+		Input.MouseMode = Input.MouseModeEnum.Hidden;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,6 +30,15 @@ public partial class Main : Node
 		if(Input.IsActionJustPressed("Mute")){
 			AudioServer.SetBusMute(1, true);
 		}
+
+		if(Input.IsActionJustPressed("OpenMenu")){
+			GetNode<Button>("UI/QuitButton").Visible = true;
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+	}
+
+	public void OnQuitButtonPressed(){
+		GetTree().Quit();
 	}
 
 	public void OnAudioStreamPlayerFinished(){

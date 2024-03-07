@@ -60,6 +60,15 @@ text = "[center][color=red]You died[/color]
 Press 'R' to Restart[/center]"
 script = ExtResource("4_218ha")
 
+[node name="QuitButton" type="Button" parent="UI"]
+visible = false
+offset_left = 985.0
+offset_top = 16.0
+offset_right = 1027.0
+offset_bottom = 47.0
+text = "Quit
+"
+
 [node name="Level1" parent="." instance=ExtResource("6_nqjs8")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -70,5 +79,6 @@ bus = &"Music"
 [connection signal="Died" from="Player" to="UI/DeathScreen" method="OnPlayerDied"]
 [connection signal="LoseHP" from="Player" to="UI/Label" method="OnPlayerLoseHP"]
 [connection signal="Shoot" from="Player" to="." method="OnPlayerShoot"]
+[connection signal="pressed" from="UI/QuitButton" to="." method="OnQuitButtonPressed"]
 [connection signal="OnLevelFinish" from="Level1" to="." method="OnLevelFinish"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="OnAudioStreamPlayerFinished"]
