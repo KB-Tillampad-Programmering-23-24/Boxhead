@@ -26,6 +26,10 @@ public partial class Main : Node
 	public override void _Process(double delta)
 	{
 		camera.Position = player.Position;
+	}
+
+	public override void _Input(InputEvent @event){
+		//GD.Print(@event);
 
 		if(Input.IsActionJustPressed("Mute")){
 			AudioServer.SetBusMute(1, true);
@@ -34,6 +38,25 @@ public partial class Main : Node
 		if(Input.IsActionJustPressed("OpenMenu")){
 			GetNode<Button>("UI/QuitButton").Visible = true;
 			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+
+		if(Input.IsActionJustPressed("Save")){
+			using var saveGame = FileAccess.Open("user://savegame.banan", FileAccess.ModeFlags.Write);
+			saveGame.StoreLine(player.currentHP + "");
+			GD.Print("Save");
+		}
+
+		if(Input.IsActionJustPressed("Load")){
+			GD.Print("Load");
+			if(!FileAccess.FileExists("user://savegame.banan")){
+				GD.Print("File doesn't exists please save the game first");
+				return;
+			}
+
+			using var saveGame = FileAccess.Open("user://savegame.banan", FileAccess.ModeFlags.Read);
+			int data = Convert.ToInt32(saveGame.GetLine());
+			player.currentHP = data;
+			GetNode<Label>("UI/Label").OnPlayerLoseHP(data);
 		}
 	}
 
