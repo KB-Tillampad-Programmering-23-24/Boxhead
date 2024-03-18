@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class Player : CharacterBody2D
@@ -106,6 +107,36 @@ public partial class Player : CharacterBody2D
 			}
 		}
 
+	}
+
+	public Dictionary<string, Variant> Save(){
+		return new Dictionary<string, Variant>(){
+			{"PosX", Position.X},
+			{"PosY", Position.Y},
+			{"HP", currentHP},
+		};
+	}
+
+	public void Load(Dictionary<string,Variant> data){
+		GD.Print(data);
+		var loadedPosition = new Vector2();
+		foreach (var (key, value) in data)
+		{
+			switch(key){
+				case "HP": 
+					currentHP = Convert.ToInt32(value.ToString());
+					EmitSignal(SignalName.LoseHP, currentHP);
+					break;
+				case "PosX":
+					loadedPosition.X = Convert.ToSingle(value.ToString());
+					break;
+				case "PosY":
+					loadedPosition.Y = Convert.ToSingle(value.ToString());
+					break;
+			}
+				
+		}
+		Position = loadedPosition;
 	}
 
 	public void OnAnimationFinished(string name){

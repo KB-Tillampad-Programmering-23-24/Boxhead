@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class Main : Node
@@ -41,22 +42,28 @@ public partial class Main : Node
 		}
 
 		if(Input.IsActionJustPressed("Save")){
-			using var saveGame = FileAccess.Open("user://savegame.banan", FileAccess.ModeFlags.Write);
-			saveGame.StoreLine(player.currentHP + "");
+			using var saveGame = FileAccess.Open("user://savegame.json", FileAccess.ModeFlags.Write);
+			saveGame.StoreLine(Json.Stringify(player.Save()));
 			GD.Print("Save");
 		}
 
 		if(Input.IsActionJustPressed("Load")){
 			GD.Print("Load");
-			if(!FileAccess.FileExists("user://savegame.banan")){
+			if(!FileAccess.FileExists("user://savegame.json")){
 				GD.Print("File doesn't exists please save the game first");
 				return;
 			}
 
-			using var saveGame = FileAccess.Open("user://savegame.banan", FileAccess.ModeFlags.Read);
-			int data = Convert.ToInt32(saveGame.GetLine());
-			player.currentHP = data;
-			GetNode<Label>("UI/Label").OnPlayerLoseHP(data);
+			using var saveGame = FileAccess.Open("user://savegame.json", FileAccess.ModeFlags.Read);
+			var json = new Json();
+			var data = json.Parse(saveGame.GetLine());
+			var dictionaryData = new Dictionary<string, Variant>((Dictionary)json.Data);
+			player.Load(dictionaryData);
+
+
+			//int data = Convert.ToInt32(saveGame.GetLine());
+			//player.currentHP = data;
+			//GetNode<Label>("UI/Label").OnPlayerLoseHP(data);
 		}
 	}
 
