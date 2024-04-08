@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Globalization;
 
 public partial class Player : CharacterBody2D
 {
@@ -120,6 +121,7 @@ public partial class Player : CharacterBody2D
 	public void Load(Dictionary<string,Variant> data){
 		GD.Print(data);
 		var loadedPosition = new Vector2();
+		var culture = new CultureInfo("en-US");
 		foreach (var (key, value) in data)
 		{
 			switch(key){
@@ -128,10 +130,10 @@ public partial class Player : CharacterBody2D
 					EmitSignal(SignalName.LoseHP, currentHP);
 					break;
 				case "PosX":
-					loadedPosition.X = Convert.ToSingle(value.ToString());
+					loadedPosition.X = Convert.ToSingle(value.ToString(), culture);
 					break;
 				case "PosY":
-					loadedPosition.Y = Convert.ToSingle(value.ToString());
+					loadedPosition.Y = Convert.ToSingle(value.ToString(), culture);
 					break;
 			}
 				

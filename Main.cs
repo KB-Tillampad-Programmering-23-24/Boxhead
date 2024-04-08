@@ -42,9 +42,17 @@ public partial class Main : Node
 		}
 
 		if(Input.IsActionJustPressed("Save")){
+			GD.Print("Save start");
 			using var saveGame = FileAccess.Open("user://savegame.json", FileAccess.ModeFlags.Write);
-			saveGame.StoreLine(Json.Stringify(player.Save()));
-			GD.Print("Save");
+			
+			saveGame.StoreLine(Json.Stringify(Save()));
+			var children = GetChildren();
+			foreach(var child in children){
+				if(child.HasMethod("Save")){
+					saveGame.StoreLine(Json.Stringify(child.Call("Save")));
+				}
+			}
+			GD.Print("Save complete");
 		}
 
 		if(Input.IsActionJustPressed("Load")){
@@ -58,13 +66,36 @@ public partial class Main : Node
 			var json = new Json();
 			var data = json.Parse(saveGame.GetLine());
 			var dictionaryData = new Dictionary<string, Variant>((Dictionary)json.Data);
+			Load(dictionaryData);
+			
+			while(saveGame.GetPosition() < saveGame.GetLength()){
+				GD.Print(saveGame.GetLine());
+			}
+			/*
+			var json = new Json();
+			var data = json.Parse(saveGame.GetLine());
+			var dictionaryData = new Dictionary<string, Variant>((Dictionary)json.Data);
 			player.Load(dictionaryData);
-
+*/
 
 			//int data = Convert.ToInt32(saveGame.GetLine());
 			//player.currentHP = data;
 			//GetNode<Label>("UI/Label").OnPlayerLoseHP(data);
 		}
+	}
+
+	public Dictionary<string, Variant> Save(){
+		return new Dictionary<string, Variant>(){
+			{"Level", level}
+		};
+	}
+
+	public void Load(Dictionary<string, Variant> data){
+		currentLevel.QueueFree();
+		level = (int)data["Level"];
+		var loadedLevel = GD.Load<PackedScene>("res://Level"+level+".tscn").Instantiate<Level>();
+		AddChild(loadedLevel);
+		currentLevel = loadedLevel;
 	}
 
 	public void OnQuitButtonPressed(){
@@ -81,6 +112,7 @@ public partial class Main : Node
 		level++;
 		var nextLevel = GD.Load<PackedScene>("res://Level"+level+".tscn").Instantiate<Level>();
 		AddChild(nextLevel);
+		currentLevel = nextLevel;
 	}
 
 	public void OnPlayerShoot(int playerDirection){
